@@ -21,5 +21,31 @@ function productArray(nums: Array<number>): Array<number> {
     return result
 }
 
-console.log(productArray([1, 2, 3, 4, 5]))
-console.log(productArray([3, 2, 1]))
+// console.log(productArray([1, 2, 3, 4, 5]))
+// console.log(productArray([3, 2, 1]))
+
+// Keep a running product in one variable and write straight into result
+function productArrayNoDivision(nums: Array<number>): Array<number> {
+    const result: Array<number> = new Array(nums.length)
+
+    // result[i] = product of everything to the left of i
+    let prefix = 1
+    for (let i = 0; i < nums.length; i++) {
+        result[i] = prefix
+        prefix *= nums[i]
+        // console.log('prefix ', prefix)
+    }
+    // console.log('prefix products ', result)
+    // multiply in the product of everything to the right of i
+    let suffix = 1
+    for (let i = nums.length-1; i >= 0 ; i--) {
+        result[i] *= suffix
+        suffix *= nums[i]
+        // console.log('suffix ', suffix)
+    }
+    return result
+
+}
+
+console.log(productArrayNoDivision([1, 2, 3, 4, 5]))
+console.log(productArrayNoDivision([3, 2, 1]))
